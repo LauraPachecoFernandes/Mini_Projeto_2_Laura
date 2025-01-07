@@ -1,0 +1,235 @@
+/* ============================== 
+   Estilos Gerais
+   ============================== */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============================== 
+   Estilos do Corpo
+   ============================== */
+body {
+    font-family: 'Georgia', serif; /* Fonte com estilo similar ao da imagem */
+    line-height: 1.8;
+    background-color: #1a1e3b; /* Fundo azul escuro */
+    color: #ffffff; /* Texto branco */
+    padding-bottom: 60px; /* Espaço para evitar sobreposição com o footer fixo */
+}
+
+/* ============================== 
+   Estilos do Cabeçalho
+   ============================== */
+header {
+    position: fixed; /* Torna o cabeçalho fixo no topo da página */
+    top: 0; /* Alinha o cabeçalho ao topo */
+    left: 0;
+    width: 100%; /* Faz o cabeçalho ocupar a largura total da página */
+    z-index: 1000; /* Garante que o cabeçalho fique acima dos outros elementos */
+    background: #1a1e3b; /* Mantém o fundo escuro */
+    color: #ffffff;
+    padding: 10px 20px;
+    display: flex; /* Torna o header um contêiner flexível */
+    justify-content: space-between; /* Espaço entre o conteúdo do header */
+    text-align: left;
+    font-size: 1.0rem;
+}
+
+header h1 {
+    font-weight: normal;
+}
+
+/* ============================== 
+   Estilos da Navegação
+   ============================== */
+nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 40px;
+    margin-top: 10px;
+    background: #1a1e3b;
+}
+
+nav a {
+    color: #ffffff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-family: 'Arial', sans-serif; /* Fonte sans-serif para os links, criando contraste */
+}
+
+nav a:hover {
+    color: #9208c0; 
+}
+
+/* ============================== 
+   Seção de Conteúdo
+   ============================== */
+.content-section {
+    padding: 60px 40px; /* Espaçamento generoso para imitar o estilo da imagem */
+    padding-top: 100px; /* Espaço extra para evitar sobreposição com o cabeçalho fixo */
+    margin: 0 auto;
+    max-width: 800px;
+    text-align: left;
+}
+
+/* Estilo para títulos */
+.content-section h2 {
+    color: #cb0de4;
+    font-size: 2rem;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+/* Estilo para h3 */
+.content-section h3 {
+    color: #ff6600; /* Cor do texto para h3 */
+    font-size: 1.5rem; /* Tamanho do h3 */
+    font-weight: normal;
+    margin-bottom: 15px; /* Espaçamento abaixo do h3 */
+}
+
+/* Estilo para parágrafos */
+.content-section p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-align: justify; /* Justifica o texto */
+}
+
+/* Estilo para listas */
+.content-section ul {
+    list-style-type: disc; /* Define o tipo de marcador */
+    padding-left: 80px; /* Aumenta o recuo à esquerda para as listas */
+    margin: 10px 0; /* Espaço vertical entre a lista e o texto adjacente */
+}
+
+.content-section li {
+    margin-bottom: 5px; /* Espaçamento entre os itens da lista */
+}
+
+/* ============================== 
+   Estilo para imagem centralizada
+   ============================== */
+.image-container {
+    text-align: center; /* Centraliza a imagem dentro do contêiner */
+    margin: 20px 0; /* Espaçamento em torno da imagem */
+}
+
+.profile-image {
+    max-width: 100%; /* Permite que a imagem seja responsiva */
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+/* ============================== 
+   Estilo geral para o caixa do PDF
+   ============================== */
+.pdf-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* Defina o tamanho máximo do PDF */
+    margin: 20px 0;
+}
+
+/* Estilo para o iframe */
+.pdf-container iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+    align-items: center;
+}
+
+/* Estilo para o título sobreposto */
+.pdf-container .pdf-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+    color: white;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Suavidade na transição */
+    pointer-events: none; /* Evita interferência no hover */
+}
+
+/* Exibe o título ao passar o mouse */
+.pdf-container:hover .pdf-title {
+    opacity: 1;
+}
+
+/* ============================== 
+   Estilos do Mapa
+   ============================== */
+   #map {
+    width: 100%;
+    height: 400; /* Altura fixa do mapa */
+    margin: 20px; /* Adiciona margem superior para evitar a sobreposição com o cabeçalho */
+    border: 2px solid #ffffff; /* Borda ao redor do mapa */
+    border-radius: 10px; /* Bordas arredondadas */
+    overflow: hidden; /* Garante que o conteúdo não ultrapasse os limites do mapa */
+    position: relative; /* Necessário para posicionar a legenda dentro do mapa */
+}
+
+#legend i {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    border: 1px solid #ffffff; /* Destaque nos ícones da legenda */
+    vertical-align: middle; /* Alinha os ícones verticalmente ao texto */
+}
+
+/* ============================== 
+   Rodapé fixo
+   ============================== */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #1a1e3b;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+/* ============================== 
+   Adaptação
+   ============================== */
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column; /* Empilha os links da navegação verticalmente */
+        padding: 10px;
+    }
+    
+    .content-section {
+        padding: 40px 20px; /* Reduz o padding em telas menores */
+        padding-top: 100px; /* Ajuste o padding-top em telas menores também */
+    }
+
+    header {
+        flex-direction: column; /* Alinha o conteúdo do cabeçalho em coluna */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

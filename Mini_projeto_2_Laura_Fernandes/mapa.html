@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crimes in Boston - Interactive Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+</head>
+<body>
+    <header>
+        <h1>
+            <a href="index.html" title="Ir para a página inicial" style="color: inherit; text-decoration: none;">
+                Laura Pacheco Fernandes
+            </a>
+        </h1>
+        <nav>
+            <a href="index.html" title="Página inicial">Home</a>
+            <a href="sobre_mim.html" title="Saiba mais sobre mim">Sobre Mim</a>
+            <a href="experiencia.html" title="Experiência">Experiência</a>
+            <a href="formacao.html" title="Formação">Formação</a>
+            <a href="trabalhos.html" title="Trabalhos">Trabalhos</a>
+            <a href="mapas_interativos.html" title="Mapa Interativo">Mapa Interativo</a>
+            <a href="contactos.html" title="Contactos">Contactos</a>
+        </nav>
+    </header>
+
+    <footer>
+        <p>&copy; 2024 Laura Pacheco Fernandes</p>
+    </footer>
+
+    <h2>Mapa Interetivo - Crimes em Boston</h2>
+    <main class="content-section">
+        <h2>Mapa Interativo de Crimes em Boston</h2>
+        <p>Explore os dados de crimes em Boston organizados por ano no mapa abaixo:</p>
+  
+        
+    </nav>
+    <div id="map" style="width: 100%; height: 700px; position: relative;">
+    <div id="legend" style="background: rgb(10, 0, 0); padding: 10px; position: absolute; bottom: 30px; left: 10px; border: 1px solid #00000000; z-index: 1000;">
+        <i style="background: red; width: 18px; height: 18px; display: inline-block; margin-right: 5px;"></i> 2015<br>
+        <i style="background: blue; width: 18px; height: 18px; display: inline-block; margin-right: 5px;"></i> 2016<br>
+        <i style="background: green; width: 18px; height: 18px; display: inline-block; margin-right: 5px;"></i> 2017<br>
+        <i style="background: purple; width: 18px; height: 18px; display: inline-block; margin-right: 5px;"></i> 2018<br>
+        <i style="background: orange; width: 18px; height: 18px; display: inline-block; margin-right: 5px;"></i> 2019<br>
+        <i style="background: yellow; width: 18px; height: 18px; display: inline-block; margin-right: 5px;"></i> 2020<br>
+
+    </div>
+
+    <script>
+        // Initialize the map and set its view to Boston
+        var map = L.map('map').setView([42.3601, -71.0589], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Function to assign colors based on year
+        function getColor(year) {
+            var colors = {
+                '2015': 'red',
+                '2016': 'blue',
+                '2017': 'green',
+                '2018': 'purple',
+                '2019': 'orange',
+                '2020': 'yellow',
+                'Unknown': 'gray'
+            };
+            return colors[year] || 'black';
+        }
+
+        // Layer control
+        var layersByYear = {};
+
+        // Fetch the GeoJSON data from the file and add it to the map
+        fetch('Crimes_Boston_Laura.geojson')
+            .then(response => response.json())
+            .then(data => {
+                // Group features by year
+                data.features.forEach(feature => {
+                    var year = feature.properties.year || 'Unknown';
+                    if (!layersByYear[year]) {
+                        layersByYear[year] = L.layerGroup();
+                    }
+
+                    var layer = L.geoJSON(feature, {
+                        pointToLayer: function (feature, latlng) {
+                            return L.circleMarker(latlng, {
+                                radius: 8,
+                                fillColor: getColor(year),
+                                color: '#000',
+                                weight: 1,
+                                opacity: 1,
+                                fillOpacity: 0.8
+                            });
+                        },
+                        onEachFeature: function (feature, layer) {
+                            layer.bindPopup('<b>' + (feature.properties.businessname || 'No Name') + '</b><br>' + (feature.properties.address || 'No Address'));
+                        }
+                    });
+
+                    layersByYear[year].addLayer(layer);
+                });
+
+                // Add layer control with grouped layers
+                var overlayMaps = {};
+                Object.keys(layersByYear).forEach(year => {
+                    overlayMaps[year] = layersByYear[year];
+                });
+
+                L.control.layers(null, overlayMaps, { collapsed: true }).addTo(map);
+            })
+            .catch(err => console.error('Error loading GeoJSON data:', err));
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
